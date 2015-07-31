@@ -1,0 +1,60 @@
+body {
+	margin: 0px;
+	font-family: Helvetica;
+	background-image: url("img/FloatingSquares.png");
+	background-position: 50% 0%;
+	background-repeat: no-repeat;
+}
+
+#wrapper {
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
+ul {
+	padding-left: 25px;
+	font-family: monospace;
+	padding-bottom: 3px;
+}
+
+ul li {
+	list-style-type: none;
+}
+
+p {
+	text-align: justify;
+	line-height: 1.3
+}
+
+h1 {
+	text-align: center;
+}
+
+.curlyTitle {
+	font-size: 65px;
+	font-weight: normal;
+	margin: 0 15px 0 15px;
+}
+
+#toyList {
+	overflow: hidden;
+	position: relative;
+	border-top: 1px solid #DADADA;
+	border-bottom: 1px solid #DADADA;
+}
+
+#listBlock {
+	width: 15px;
+	height: 3px;
+	background-color: hsl(0, 98%, 50%);
+	position: absolute;
+	top: 8px;
+	left: 4px;
+	transition: top .1s;
+}
+
+.description {
+	padding: 10px;
+}

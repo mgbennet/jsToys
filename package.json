@@ -1,0 +1,14 @@
+{
+	"name": "jsToys",
+	"version": "0.0.1",
+	"description": "A collection of experiments with web technologies",
+	"dependencies": {
+		"react": "^0.13.3",
+    "react-router": "^0.13.3"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Mike Bennett",
+	"license": "MIT"
+}

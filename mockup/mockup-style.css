@@ -1,0 +1,80 @@
+body {
+	margin: 0px;
+	font-family: Helvetica;
+	background-image: url("../img/FloatingSquares.png");
+	background-position: 50% 0%;
+	background-repeat: no-repeat;
+}
+
+#wrapper {
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
+#header {
+	width: 500px;
+	background: -moz-linear-gradient(top, #FFF 0%, #d6a3a3 70%, #FFF 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFF), color-stop(70%,#d6a3a3), color-stop(100%,#FFF));
+	background: -webkit-linear-gradient(top, #FFF 0%,#d6a3a3 70%,#FFF 100%);
+	background: -o-linear-gradient(top, #FFF 0%,#d6a3a3 70%,#FFF 100%);
+	background: -ms-linear-gradient(top, #FFF 0%,#d6a3a3 70%,#FFF 100%);
+	background: linear-gradient(to bottom, #FFF 0%,#d6a3a3 70%,#FFF 100%);
+}
+
+#header h1 {
+	
+}
+
+.braceTitle {
+	font-size: 65px;
+	font-weight: normal;
+	margin: 0 15px 0 15px;
+}
+
+#title {
+	position: absolute;
+	top: 28px;
+	right: 0px;
+}
+
+#title p {
+	text-align: right;
+	font-style: italic;
+	font-size: 10px;
+}
+
+.listLeft {
+	width: 320px;
+	border-top: 1px solid #DADADA;
+	border-bottom: 1px solid #DADADA;
+	float: left;
+}
+
+.imageRight { 
+	width: 180px;
+	float: right;
+}
+
+.textBlock {
+	clear: both;
+	width: 500px;
+	padding: 0px 5px 0px 5px;
+}
+
+#list {
+	padding-left: 0px;
+	margin-bottom: 6px;
+}
+#list li {
+	margin-bottom: 3px;
+	list-style: none;
+}
+#list li span {
+	margin-left: 8px;
+	margin-right: 8px;
+	background-color: #f01010;
+	padding: 1px 5px;
+	border-radius: 20px;
+}
