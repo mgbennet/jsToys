@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 var squares = [],
 	waves = [],
-	numSquares = 15,
+	numSquares = 17,
 	baseHSL = [0, 100, 50],
 	mouseoverHSL = [245, 100, 50],
 	waveHSL = [143, 100, 50];

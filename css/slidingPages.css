@@ -3,8 +3,9 @@ body {
 	font-family: Helvetica;
 }
 
-#page {
-	width: 480px;
+#wrapper {
+	width: 320px;
+	height: 480px;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
@@ -13,42 +14,59 @@ body {
 
 #header {
 	background-color: #cc403e;
-	width: 440px;
-	height: 100px;
-	margin: 20px;
+	width: 300px;
+	height: 80px;
+	margin: 5px 10px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius: 12px;
 }
 
 .rightBtnWrapper {
-	position:absolute;
-	width: 
+	position: absolute;
+	width: 25px;
+	height: 330px;
+	background-color: #DADADA;
+	left: 295px;
+}
+
+.leftBtnWrapper {
+	position: absolute;
+	width: 25px;
+	height: 330px;
+	background-color: #DADADA;
+	left: 0px;
 }
 
 .twoColumns {
-	width: 380px;
-	height: 280px;
+	width: 250px;
+	height: 330px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 #leftColumn {
 	border: 1px solid #DADADA;
-	width: 250px;
-	height: 280px;
+	width: 170px;
+	height: 330px;
 	float: left;
 }
 
 #rightColumn {
 	border: 1px solid #DADADA;
-	width: 125px;
-	height: 280px;
+	width: 75px;
+	height: 330px;
 	float: right;
 }
 
 #footer {
 	clear: both;
 	background-color: #a04c4b;
-	width: 440px;
-	height: 70px;
-	margin: 20px;
+	width: 300px;
+	height: 50px;
+	margin: 5px 10px;
 	position: relative;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
 }
