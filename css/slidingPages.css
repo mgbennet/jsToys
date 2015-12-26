@@ -10,61 +10,120 @@ body {
 	margin-right: auto;
 	position: relative;
 	border: 1px solid #DADADA;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 #header {
 	background-color: #cc403e;
-	width: 300px;
+	width: 320px;
 	height: 80px;
-	margin: 5px 10px;
 	-moz-border-radius: 12px;
 	-webkit-border-radius: 12px;
 	border-radius: 12px;
 }
 
-.rightBtnWrapper {
+#headerOrb {
+	position: relative;
+	background-color: #73021e;
+	height: 70px;
+	width: 70px;
+	top: 5px;
+	-moz-border-radius: 35px;
+	-webkit-border-radius: 35px;
+	border-radius: 35px;
+	transition: left 0.2s;
+}
+
+.headerOrbLeft {
+	left: 5px;
+}
+
+.headerOrbRight {
+	left: 245px;
+}
+
+.btnWrapper {
 	position: absolute;
 	width: 25px;
-	height: 330px;
+	height: 345px;
 	background-color: #DADADA;
+	cursor: pointer;
+}
+.rightBtnWrapper {
 	left: 295px;
 }
 
+.rightBtn {
+	background-image: url(../img/RightArrow.png);
+	height: 50px;
+	margin-top: 147px;
+}
+
 .leftBtnWrapper {
-	position: absolute;
-	width: 25px;
-	height: 330px;
-	background-color: #DADADA;
 	left: 0px;
+}
+
+.leftBtn {
+	background-image: url(../img/LeftArrow.png);
+	height: 50px;
+	margin-top: 147px;
 }
 
 .twoColumns {
 	width: 250px;
-	height: 330px;
+	height: 345px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#leftColumn {
+.leftColumn {
 	border: 1px solid #DADADA;
-	width: 170px;
-	height: 330px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: inherit;
 	float: left;
+	padding-top: 20px;
 }
 
-#rightColumn {
+.rightColumn {
 	border: 1px solid #DADADA;
-	width: 75px;
-	height: 330px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: inherit;
 	float: right;
+	padding-top: 20px;
+}
+
+#leftView .twoColumns .leftColumn {
+	width: 170px;
+}
+#leftView .twoColumns .rightColumn {
+	width: 75px;
+}
+#rightView .twoColumns .leftColumn {
+	width: 75px;
+}
+#rightView .twoColumns .rightColumn {
+	width: 170px;
+}
+
+.nonesenseLine {
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-top: 15px;
+	height: 8px;
+	background-color: #999;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
 #footer {
 	clear: both;
 	background-color: #a04c4b;
-	width: 300px;
-	height: 50px;
-	margin: 5px 10px;
+	width: 320px;
+	height: 55px;
 	position: relative;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
