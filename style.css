@@ -4,6 +4,7 @@ body {
 	background-image: url("img/FloatingSquares.png");
 	background-position: 50% 0%;
 	background-repeat: no-repeat;
+	background-color: #FAFAFA
 }
 
 #wrapper {

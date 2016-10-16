@@ -1,0 +1,8 @@
+#myCanvas {
+	border:1px solid #d3d3d3;
+}
+
+.controls div {
+	width: 250px;
+	position: absolute;
+}
