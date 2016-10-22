@@ -1,10 +1,4 @@
 (function() {
-var Router = ReactRouter;
-
-var DefaultRoute = Router.DefaultRoute,
-	Link = Router.Link,
-	Route = Router.Route,
-	RouteHandler = Router.RouteHandler;
 
 var SlidingPages = React.createClass({
 	getInitialState() {
@@ -63,11 +57,13 @@ var LeftView = React.createClass({
 	render() {
 		var nonesense = [],
 			amountOfNonesense = Math.floor(Math.random() * 5 + 3);
-		for (var i = 0; i < amountOfNonesense; i++) nonesense[i] = <div key={i} className="nonesenseLine"></div>;
+		for (var i = 0; i < amountOfNonesense; i++) 
+			nonesense[i] = <div key={i} className="nonesenseLine"></div>;
+		
 		return (
 			<div id="leftView" className="view">
 				<div className="twoColumns">
-					<div className="leftColumn">
+					<div className="leftColumn contentColumn" width="170px">
 						{nonesense}
 					</div>
 					<div className="rightColumn"></div>
@@ -83,11 +79,12 @@ var RightView = React.createClass({
 			amountOfNonesense = Math.floor(Math.random() * 5 + 3);
 		for (var i = 0; i < amountOfNonesense; i++)
 			nonesense[i] = <div key={i} className="nonesenseLine"></div>;
+		
 		return (
 			<div id="rightView" className="view">
 				<div className="twoColumns">
 					<div className="leftColumn"></div>
-					<div className="rightColumn">
+					<div className="rightColumn contentColumn"  width="170px">
 						{nonesense}
 					</div>
 				</div>
@@ -96,7 +93,7 @@ var RightView = React.createClass({
 	}
 });
 
-React.render(
+ReactDOM.render(
 	<SlidingPages />,
 	document.getElementById('wrapper')
 );

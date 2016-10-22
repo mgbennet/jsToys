@@ -60,9 +60,10 @@
 }
 
 .leftBtn {
-	background-image: url(../img/LeftArrow.png);
+	background-image: url(../img/RightArrow.png);
 	height: 50px;
 	margin-top: 147px;
+	transform: rotate(.5turn);
 }
 
 .twoColumns {
@@ -73,33 +74,24 @@
 }
 
 .leftColumn {
-	border: 1px solid #DADADA;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	height: inherit;
 	float: left;
-	padding-top: 20px;
 }
 
 .rightColumn {
+	float: right;
+}
+
+.twoColumns>div {
 	border: 1px solid #DADADA;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	height: inherit;
 	float: right;
 	padding-top: 20px;
+	width: 75px;
 }
 
-#leftView .twoColumns .leftColumn {
-	width: 170px;
-}
-#leftView .twoColumns .rightColumn {
-	width: 75px;
-}
-#rightView .twoColumns .leftColumn {
-	width: 75px;
-}
-#rightView .twoColumns .rightColumn {
+.twoColumns .contentColumn {
 	width: 170px;
 }
 
@@ -123,4 +115,10 @@
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
+}
+
+
+.instructions p {
+	text-align: center;
+	font-size: 14px;
 }
