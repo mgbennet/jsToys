@@ -94,7 +94,7 @@ function makeSquares(num) {
 	for (var i = 0; i < num; i++) {
 		var row = document.createElement("div"),
 			rowArray = [];
-		row.setAttribute("class", "row");
+		row.setAttribute("class", "grid-row");
 		row.style.width = 30*num+"px";
 		sqrsDiv.appendChild(row);
 		squares.push(rowArray);
@@ -104,8 +104,7 @@ function makeSquares(num) {
 				obj = new SqrObj(i, j, sqr, color);
 			sqr.setAttribute("class", "square");
 			sqr.style.backgroundColor = color;
-			// var img = "url('./images/papertexture_"+Math.floor(rand(1, 4))+".png')";
-			// sqr.style.backgroundImage = img;
+			
 			sqr.addEventListener("mouseover", function(event) {
 				event.target.style.backgroundColor = HSLstring(mouseoverHSL);
 			});
