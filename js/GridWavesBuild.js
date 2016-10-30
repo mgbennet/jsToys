@@ -5,7 +5,8 @@ var squares = [],
 	numSquares = 17,
 	baseHSL = [0, 100, 50],
 	mouseoverHSL = [245, 100, 50],
-	waveHSL = [143, 100, 50];
+	waveHSL = [143, 100, 50],
+	squareSize = 30;
 
 window.requestAnimFrame = (function(callback) {
 	return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
@@ -14,6 +15,8 @@ window.requestAnimFrame = (function(callback) {
 	};
 }) ();
 
+
+//SqrObj
 function SqrObj(x, y, div, color) {
 	this.x = x;
 	this.y = y;
@@ -31,27 +34,29 @@ SqrObj.prototype.makeBase = function() {
 
 SqrObj.prototype.distance = function(tarX, tarY) {
 	//could square the comparison to not calculate the sqrt
-	return Math.sqrt(Math.pow(tarX-this.x, 2) + Math.pow(tarY-this.y, 2));
+	return Math.sqrt(Math.pow(tarX - this.x, 2) + Math.pow(tarY - this.y, 2));
 }
 
+
+//Wave
 function Wave(x, y) {
 	this.x = x;
 	this.y = y;
 	this.time = 0;
 	//duration is only as long as needed for wave to reach furthest corner
 	var corners = [squares[0][0], 
-		squares[numSquares-1][0], 
-		squares[0][numSquares-1], 
-		squares[numSquares-1][numSquares-1]],
+			squares[numSquares-1][0], 
+			squares[0][numSquares-1], 
+			squares[numSquares-1][numSquares-1]],
 		maxDist = corners.reduce(function(dist, corner) {
 			return Math.max(dist, corner.distance(x, y));
 		}, 0);
-	this.duration = (maxDist+5)*30;
+	this.duration = (maxDist + 5) * squareSize;
 }
 
 Wave.prototype.animate = function() {
 	this.time++;
-	var radius = this.time/30;
+	var radius = this.time / squareSize;
 	for (var i = 0; i < numSquares; i++) {
 		for (var j = 0; j < numSquares; j++) {
 			var dist = squares[i][j].distance(this.x, this.y)
@@ -62,12 +67,14 @@ Wave.prototype.animate = function() {
 			}
 		}
 	}
-};
+}
 
 Wave.prototype.isDone = function() {
 	return this.time >= this.duration;
 }
 
+
+//Utility functions
 function rand(min, max) {
 	return min + Math.random() * (max - min);
 }
@@ -77,11 +84,11 @@ function HSLstring(hslArray) {
 }
 
 function getRandomColor(baseH, baseS, baseL, range) {
-	var h = baseH + rand(-1*range, range);
-	var s = baseS + rand(-1*range, range);
+	var h = baseH + rand(-range, range);
+	var s = baseS + rand(-range, range);
 	if (s > 100) s = 100;
 	if (s < 0) s = 0;
-	var l = baseL + rand(-1*range, range);
+	var l = baseL + rand(-range, range);
 	if (l > 100) l = 100;
 	if (l < 0) l = 0;
 	return HSLstring([h, s, l]);
@@ -89,13 +96,13 @@ function getRandomColor(baseH, baseS, baseL, range) {
 
 function makeSquares(num) {
 	var sqrsDiv = document.getElementById("randomSquares");
-	document.getElementById("wrapper").style.width = 30*num+"px";
+	document.getElementById("wrapper").style.width = squareSize * num + "px";
 	
 	for (var i = 0; i < num; i++) {
 		var row = document.createElement("div"),
 			rowArray = [];
 		row.setAttribute("class", "grid-row");
-		row.style.width = 30*num+"px";
+		row.style.width = squareSize * num + "px";
 		sqrsDiv.appendChild(row);
 		squares.push(rowArray);
 		for (var j = 0; j < num; j++) {

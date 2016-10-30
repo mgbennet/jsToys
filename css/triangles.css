@@ -1,8 +1,10 @@
 #myCanvas {
-	border:1px solid #d3d3d3;
+	border: 1px solid #d3d3d3;
+	border-top: 0px;
 }
 
-.controls div {
+.controls>div {
 	width: 250px;
-	position: absolute;
+	position: relative;
+	float: left;
 }
