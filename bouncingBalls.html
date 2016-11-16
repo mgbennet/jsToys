@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link type="text/css" rel="stylesheet" href="css/bouncingBalls.css"/>
+	<link type="text/css" rel="stylesheet" href="css/bouncingBallsAnimations.css"/>
+	<title>Bouncing Balls</title>
+</head>
+<body>
+	<div id="wrapper">
+		<div class="animationDiv">
+			<h3>HTML elements</h3>
+			<div class="animationHolder">
+				<div class="bouncingBallAnim">
+					<div class="ballCentered">
+						<div class="bouncingBallDiv">
+							<div class="eyeDiv left"></div>
+							<div class="eyeDiv right"></div>
+						</div>
+						<div class="bouncingTailDiv" style="margin-top: 20px">
+							<div class="bouncingTailDiv" style="animation-delay:.025s">
+								<div class="bouncingTailDiv" style="animation-delay:.05s">
+									<div class="bouncingTailDiv" style="animation-delay:.075s"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="groundLineDiv" style="width:30%; left:35%; margin-top:0px; height:4px;"></div>
+				<div class="groundLineDiv" style="width:50%; left:25%; margin-top:1px; height:2px;"></div>
+				<div class="groundLineDiv" style="width:70%; left:15%; margin-top:2px; height:1px;"></div>
+			</div>
+		</div>
+		<div class="animationDiv">
+			<h3>SVG</h3>
+			<div class="animationHolder">
+				<svg xmlns="http://www.w3.org/2000/svg">
+					<g class="bouncingBallOffset">
+						<g class="bouncingBallPosition">
+							<!-- <path class="bouncingTailSVG" 
+										d="M -25,-25 c -9,0 -25,3 -40,14 "
+										stroke-linecap="round" stroke-width="10px" fill-opacity="0" /> -->
+							<g class="bouncingTailPosition">
+								<g class="bouncingTailSection">
+									<line class="bouncingTailSVG" x1="0" y1="0" x2="-10" y2="0" />
+									<g class="bouncingTailSection" style="animation-delay:.025s">
+										<line class="bouncingTailSVG" x1="0" y1="0" x2="-10" y2="0" />
+										<g class="bouncingTailSection" style="animation-delay:.05s">
+											<line class="bouncingTailSVG" x1="0" y1="0" x2="-10" y2="0" />
+											<g class="bouncingTailSection" style="animation-delay:.075s">
+												<line class="bouncingTailSVG" x1="0" y1="0" x2="-10" y2="0" />
+											</g>
+										</g>
+									</g>
+								</g>
+							</g>
+							<circle class="bouncingBallSVG" cx="0" cy="-25" r="25" />
+						</g>
+					</g>
+					<line class="groundLineSVG" x1="35%" y1="327" x2="65%" y2="327" stroke="black" stroke-linecap="round" stroke-width="4px"/>
+					<line class="groundLineSVG" x1="25%" y1="327" x2="75%" y2="327" stroke="black" stroke-linecap="round" stroke-width="2.5px"/>
+					<line class="groundLineSVG" x1="15%" y1="327" x2="85%" y2="327" stroke="black" stroke-linecap="round" stroke-width="1.5px"/>
+				</svg>
+			</div>
+		</div>
+		<p class="description">Classic bouncing ball with squash and stretch.</p>
+	</div>
+</body>
+</html>
