@@ -51,7 +51,11 @@ body {
 }
 
 .ballCentered {
+	-webkit-transform-origin: 25px 25px;
+	-ms-transform-origin: 25px 25px;
 	transform-origin: 25px 25px;
+	-ms-animation: bounceRot 1.25s infinite; /* no vars in IE.... */
+	-webkit-animation: var(--bounceRot-anim);
 	animation: var(--bounceRot-anim);
 }
 
@@ -69,8 +73,10 @@ body {
 	background-color: #EEE;
 	position: absolute;
 	width: 4px;
-	height: 18px;
-	border-radius: 5px;
+	height: 10px;
+	border-radius: 4px;
+	-ms-animation: eyesBlink 1.25s infinite; /* no vars in IE.... */
+	-webkit-animation: var(--eyesBlink-anim);
 	animation: var(--eyesBlink-anim);
 }
 
@@ -82,7 +88,6 @@ body {
 .eyeDiv.right {
 	top: 16px;
 	left: 37px;
-	height: 17px;
 }
 
 .bouncingTailDiv {
@@ -125,8 +130,30 @@ svg .bouncingBallPosition {
 	animation: var(--bounce-anim);
 }
 
+svg .ballCenteredSVG {
+	-webkit-transform-origin: 0px -25px;
+	-ms-transform-origin: 0px -25px;
+	transform-origin: 0px -25px;
+	-ms-animation: bounceRot 1.25s infinite; /* no vars in IE.... */
+	-webkit-animation: var(--bounceRot-anim);
+	animation: var(--bounceRot-anim);
+}
+
 svg .bouncingBallSVG {
 	fill: #bea8ea;
+}
+
+svg .eyesSVG {
+	fill: #EEE;
+	-webkit-transform: translate(0px, -25px);
+	-ms-transform: translate(0px, -25px);
+	transform: translate(0px, -25px);
+}
+
+svg .eyesSVGAnim {
+	-ms-animation: eyesBlink 1.25s infinite; /* no vars in IE.... */
+	-webkit-animation: var(--eyesBlink-anim);
+	animation: var(--eyesBlink-anim);
 }
 
 svg .bouncingTailPosition {

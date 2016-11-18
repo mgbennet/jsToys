@@ -37,24 +37,32 @@
 				<svg xmlns="http://www.w3.org/2000/svg">
 					<g class="bouncingBallOffset">
 						<g class="bouncingBallPosition">
-							<!-- <path class="bouncingTailSVG" 
-										d="M -25,-25 c -9,0 -25,3 -40,14 "
-										stroke-linecap="round" stroke-width="10px" fill-opacity="0" /> -->
-							<g class="bouncingTailPosition">
-								<g class="bouncingTailSection">
-									<line class="bouncingTailSVG" x1="0" y1="0" x2="-10" y2="0" />
-									<g class="bouncingTailSection" style="animation-delay:.025s">
+							<g class="ballCenteredSVG">
+								<!-- <path class="bouncingTailSVG" 
+											d="M -25,-25 c -9,0 -25,3 -40,14 "
+											stroke-linecap="round" stroke-width="10px" fill-opacity="0" /> -->
+								<g class="bouncingTailPosition">
+									<g class="bouncingTailSection">
 										<line class="bouncingTailSVG" x1="0" y1="0" x2="-10" y2="0" />
-										<g class="bouncingTailSection" style="animation-delay:.05s">
+										<g class="bouncingTailSection" style="animation-delay:.025s">
 											<line class="bouncingTailSVG" x1="0" y1="0" x2="-10" y2="0" />
-											<g class="bouncingTailSection" style="animation-delay:.075s">
+											<g class="bouncingTailSection" style="animation-delay:.05s">
 												<line class="bouncingTailSVG" x1="0" y1="0" x2="-10" y2="0" />
+												<g class="bouncingTailSection" style="animation-delay:.075s">
+													<line class="bouncingTailSVG" x1="0" y1="0" x2="-10" y2="0" />
+												</g>
 											</g>
 										</g>
 									</g>
 								</g>
+								<circle class="bouncingBallSVG" cx="0" cy="-25" r="25" />
+								<g class="eyesSVG" transform="translate(0px, -25px)">
+									<g class="eyesSVGAnim">
+										<rect class="left" x="5" y="-10" width="4" height="10" rx="2" ry="2"></rect>
+										<rect class="right" x="12" y="-10" width="4" height="10" rx="2" ry="2"></rect>
+									</g>
+								</g>
 							</g>
-							<circle class="bouncingBallSVG" cx="0" cy="-25" r="25" />
 						</g>
 					</g>
 					<line class="groundLineSVG" x1="35%" y1="327" x2="65%" y2="327" stroke="black" stroke-linecap="round" stroke-width="4px"/>
