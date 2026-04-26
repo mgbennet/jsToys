@@ -1,24 +1,27 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 	var c = document.getElementById("myCanvas"),
-	ctx = c.getContext("2d"),
-	H = Math.sqrt(3) / 2,
-	triangles = [],
-	drawGrid = true,
-	drawOutline = false;
+		ctx = c.getContext("2d"),
+		H = Math.sqrt(3) / 2,
+		triangles = [],
+		drawGrid = true
+		drawOutline = false,
+		squeezeTogether = false;
 
 	function Triangle(x, y, side) {
 		//For upwards facing triangle, use negative 'side' value
 		this.x = x;
 		this.y = y;
+		this.side = side;
 		this.centerX = x + side / 2;
 		this.centerY = y + side * H / 2;
-		this.side = side;
+		// centroidX is equal to centerX
+		this.centroidY = y + (H * side / 3);
 		this.color = '#55FF77';
 
 		this.drawStroke = function (scale) {
 			ctx.beginPath();
 			var tempX = this.x + .5 * (1 - scale) * this.side;
-			var tempY = this.y + .5 * (1 - scale) * this.side * H;
+			var tempY = this.centroidY - scale * this.side * H / 3;
 			ctx.moveTo(tempX, tempY);
 			ctx.lineTo(tempX + this.side * scale, tempY);
 			ctx.lineTo(tempX + this.side / 2 * scale, tempY + this.side * H * scale);
@@ -39,19 +42,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		}
 
 		this.drawScaled = function (scale) {
-			ctx.beginPath();
-			var tempX = this.x + .5 * (1 - scale) * this.side;
-			var tempY = this.y + .5 * (1 - scale) * this.side * H;
-			ctx.moveTo(tempX, tempY);
-			ctx.lineTo(tempX + this.side * scale, tempY);
-			ctx.lineTo(tempX + this.side / 2 * scale, tempY + this.side * H * scale);
-			ctx.lineTo(tempX, tempY);
-			ctx.fillStyle = this.color;
-			ctx.fill();
-			if (drawGrid)
+			if (scale > 0.01) {
+				ctx.beginPath();
+				var tempX = this.x + .5 * (1 - scale) * this.side;
+				var tempY = this.centroidY - scale * this.side * H / 3;
+				ctx.moveTo(tempX, tempY);
+				ctx.lineTo(tempX + this.side * scale, tempY);
+				ctx.lineTo(tempX + this.side / 2 * scale, tempY + this.side * H * scale);
+				ctx.lineTo(tempX, tempY);
+				ctx.fillStyle = this.color;
+				ctx.fill();
+				if (drawOutline)
+					ctx.stroke();
+
+				// ctx.beginPath();
+				// ctx.fillStyle = "#000";
+				// ctx.fillRect(this.centerX - 1, this.centroidY - 1, 2, 2);
+				// ctx.stroke();
+			}
+			if (drawGrid) {
 				this.drawUnscaled();
-			if (drawOutline)
-				this.drawStroke(scale);
+			}
 		}
 	}
 
@@ -86,13 +97,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		}
 	}
 
-	document.getElementById("gridToggle").onclick = function (evt) {
+	document.getElementById("drawGrid").onclick = function (evt) {
 		drawGrid = (document.getElementById("drawGrid").checked);
 		drawFrame(evt);
 	}
 
-	document.getElementById("outlineToggle").onclick = function (evt) {
+	document.getElementById("drawOutline").onclick = function (evt) {
 		drawOutline = (document.getElementById("drawOutline").checked);
+		drawFrame(evt);
+	}
+
+	document.getElementById("squeeze").onclick = function (evt) {
+		squeezeTogether = (document.getElementById("squeeze").checked);
 		drawFrame(evt);
 	}
 

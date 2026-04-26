@@ -10,21 +10,16 @@
 </head>
 <body>
 	<div id="wrapper">
-		<canvas id="myCanvas" width="498px" height="498px">
+		<canvas id="myCanvas" width="498px" height="476px">
 			Your browser does not support the HTML5 canvas tag.
 		</canvas>
 		
 		<div class="controls">
-			<div>
-				<form id="gridToggle" autocomplete="off">
-					<input id="drawGrid" type="checkbox" name="toggleGrid" value="on" checked>Draw grid
-				</form>
-			</div>
-			<div>
-				<form id="outlineToggle" autocomplete="off">
-					<input id="drawOutline" type="checkbox" name="toggleOutline" value="on">Draw outline
-				</form>
-			</div>
+			<form id="controls-form" autocomplete="off">
+				<input id="drawGrid" type="checkbox" name="toggleGrid" value="on" checked>Draw grid
+				<input id="drawOutline" type="checkbox" name="toggleOutline" value="off">Draw outline
+				<input id="squeeze" type="checkbox" name="squeezeToggle" value="off">Squeeze together</form>
+			</form>
 		</div>
 	</div>
 </body>
