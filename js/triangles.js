@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function (event) {
-	var c = document.getElementById("myCanvas"),
+	const c = document.getElementById("myCanvas"),
 		ctx = c.getContext("2d"),
 		H = Math.sqrt(3) / 2,
-        triangleSlope = Math.tan(Math.PI / 3),
-		triangles = [],
+        triangleSlope = Math.tan(Math.PI / 3);
+	let triangles = [],
 		drawGrid = true
 		drawOutline = false,
 		squeezeTogether = false;
@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 		this.drawStroke = function (scale) {
 			ctx.beginPath();
-			var tempX = this.centerX - .5 * scale * this.side;
-			var tempY = this.centroidY - scale * this.side * H / 3;
+			const tempX = this.centerX - .5 * scale * this.side;
+			const tempY = this.centroidY - scale * this.side * H / 3;
 			ctx.moveTo(tempX, tempY);
 			ctx.lineTo(tempX + this.side * scale, tempY);
 			ctx.lineTo(tempX + this.side / 2 * scale, tempY + this.side * H * scale);
@@ -43,12 +43,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		}
 
 		this.drawScaled = function (mousePos) {
-			var distance = Math.sqrt(Math.pow(mousePos.x - this.centerX, 2) + Math.pow(mousePos.y - this.centroidY, 2));
-			var scale = Math.sqrt(Math.max(1 - (distance / 100), 0));
+			const distance = Math.sqrt(Math.pow(mousePos.x - this.centerX, 2) + Math.pow(mousePos.y - this.centroidY, 2));
+			const scale = Math.sqrt(Math.max(1 - (distance / 100), 0));
 			if (scale > 0.01) {
 				ctx.beginPath();
-				var tempX = this.centerX - .5 * scale * this.side;
-				var tempY = this.centroidY - scale * this.side * H / 3;
+				let tempX = this.centerX - .5 * scale * this.side;
+				let tempY = this.centroidY - scale * this.side * H / 3;
 				if (squeezeTogether) {
 					const xVector = (mousePos.x - this.centerX);
 					const yVector = (mousePos.y - this.centroidY);
@@ -72,9 +72,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	}
 
 	function rowOfTriangles(y, side, startDown) {
-		var numTriangles = Math.ceil(c.width / side) * 2;
+		const numTriangles = Math.ceil(c.width / side) * 2;
 		down = startDown;
-		for (var i = 0; i <= numTriangles; i++) {
+		for (let i = 0; i <= numTriangles; i++) {
 			if (startDown) {
 				triangles.push(new Triangle(i * side - side / 2, y, side));
 				triangles.push(new Triangle(i * side, y + side * H, side * -1));
@@ -86,16 +86,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	}
 
 	function fillWithTriangles(side) {
-		var numRows = Math.ceil(c.height / (side * H));
-		var down = true;
-		for (var i = 0; i <= numRows; i++) {
+		const numRows = Math.ceil(c.height / (side * H));
+		let down = true;
+		for (let i = 0; i <= numRows; i++) {
 			rowOfTriangles(i * H * side, side, down);
 			down = !down;
 		}
 	}
 
 	function getMousePos(canvas, evt) {
-		var rect = canvas.getBoundingClientRect();
+		const rect = canvas.getBoundingClientRect();
 		return {
 			x : evt.clientX - rect.left,
 			y : evt.clientY - rect.top
@@ -151,14 +151,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	}
 
 	fillWithTriangles(50);
-	for (var tri in triangles) {
-		triangles[tri].drawStroke();
+	for (let tri of triangles) {
+		tri.drawStroke();
 	}
-	var drawFrame = function (evt) {
+	const drawFrame = function (evt) {
 		ctx.clearRect(0, 0, c.width, c.height);
-		var mousePos = getMousePos(c, evt);
-		for (var tri in triangles) {
-			triangles[tri].drawScaled(mousePos);
+		let mousePos = getMousePos(c, evt);
+		for (let tri of triangles) {
+			tri.drawScaled(mousePos);
 		}
 	}
 
@@ -168,22 +168,3 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		clientY : -500
 	});
 });
-
-function rand(min, max) {
-	return min + Math.random() * (max - min);
-}
-
-function HSLstring(hslArray) {
-	return "hsl(" + hslArray[0] + "," + hslArray[1] + "%," + hslArray[2] + "%)";
-}
-
-function getRandomColor(baseH, baseS, baseL, range) {
-	var h = baseH + rand(-range, range);
-	var s = baseS + rand(-range, range);
-	if (s > 100) s = 100;
-	if (s < 0) s = 0;
-	var l = baseL + rand(-range, range);
-	if (l > 100) l = 100;
-	if (l < 0) l = 0;
-	return HSLstring([h, s, l]);
-}

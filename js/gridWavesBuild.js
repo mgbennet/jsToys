@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
-var squares = [],
+const squares = [],
 	waves = [],
 	numSquares = 17,
 	baseHSL = [0, 100, 50],
@@ -44,7 +44,7 @@ function Wave(x, y) {
 	this.y = y;
 	this.time = 0;
 	//duration is only as long as needed for wave to reach furthest corner
-	var corners = [squares[0][0], 
+	const corners = [squares[0][0], 
 			squares[numSquares-1][0], 
 			squares[0][numSquares-1], 
 			squares[numSquares-1][numSquares-1]],
@@ -56,10 +56,10 @@ function Wave(x, y) {
 
 Wave.prototype.animate = function() {
 	this.time++;
-	var radius = this.time / squareSize;
-	for (var i = 0; i < numSquares; i++) {
-		for (var j = 0; j < numSquares; j++) {
-			var dist = squares[i][j].distance(this.x, this.y)
+	let radius = this.time / squareSize;
+	for (let i = 0; i < numSquares; i++) {
+		for (let j = 0; j < numSquares; j++) {
+			let dist = squares[i][j].distance(this.x, this.y)
 			if (dist <= radius && dist >= radius-3) {
 				squares[i][j].makeGreen();
 			} else if (dist < radius-3 && dist >= radius-5) {
@@ -74,39 +74,19 @@ Wave.prototype.isDone = function() {
 }
 
 
-//Utility functions
-function rand(min, max) {
-	return min + Math.random() * (max - min);
-}
-
-function HSLstring(hslArray) {
-	return "hsl(" + hslArray[0] + "," + hslArray[1] + "%," + hslArray[2] + "%)";
-}
-
-function getRandomColor(baseH, baseS, baseL, range) {
-	var h = baseH + rand(-range, range);
-	var s = baseS + rand(-range, range);
-	if (s > 100) s = 100;
-	if (s < 0) s = 0;
-	var l = baseL + rand(-range, range);
-	if (l > 100) l = 100;
-	if (l < 0) l = 0;
-	return HSLstring([h, s, l]);
-}
-
 function makeSquares(num) {
-	var sqrsDiv = document.getElementById("randomSquares");
+	const sqrsDiv = document.getElementById("randomSquares");
 	document.getElementById("wrapper").style.width = squareSize * num + "px";
 	
-	for (var i = 0; i < num; i++) {
-		var row = document.createElement("div"),
+	for (let i = 0; i < num; i++) {
+		const row = document.createElement("div"),
 			rowArray = [];
 		row.setAttribute("class", "grid-row");
 		row.style.width = squareSize * num + "px";
 		sqrsDiv.appendChild(row);
 		squares.push(rowArray);
-		for (var j = 0; j < num; j++) {
-			var sqr = document.createElement("div"),
+		for (let j = 0; j < num; j++) {
+			const sqr = document.createElement("div"),
 				color = getRandomColor(0, 100, 50, 5),
 				obj = new SqrObj(i, j, sqr, color);
 			sqr.setAttribute("class", "square");
@@ -133,7 +113,7 @@ function makeSquares(num) {
 
 function run() {
 	requestAnimationFrame(run);
-	for (var i = 0; i < waves.length; i++) {
+	for (let i = 0; i < waves.length; i++) {
 		waves[i].animate();
 		if (waves[i].isDone()) 
 			waves.splice(i--, 1);

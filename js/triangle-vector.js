@@ -1,6 +1,5 @@
-
 document.addEventListener("DOMContentLoaded", function (event) {
-	var c = document.getElementById("myCanvas"),
+	const c = document.getElementById("myCanvas"),
 		ctx = c.getContext("2d"),
 		H = Math.sqrt(3) / 2,
         triangleSlope = Math.tan(Math.PI / 3);
@@ -70,16 +69,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
     function getMousePos(canvas, evt) {
-		var rect = canvas.getBoundingClientRect();
+		const rect = canvas.getBoundingClientRect();
 		return {
 			x : evt.clientX - rect.left,
 			y : evt.clientY - rect.top
 		}
 	}
 
-	var drawFrame = function (evt) {
+	const drawFrame = function (evt) {
 		ctx.clearRect(0, 0, c.width, c.height);
-		var mousePos = getMousePos(c, evt);
+		const mousePos = getMousePos(c, evt);
 
         drawTriangle(250, 150, 100);
         drawTriangle(250, 300, -100);
