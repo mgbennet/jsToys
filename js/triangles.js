@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	var c = document.getElementById("myCanvas"),
 		ctx = c.getContext("2d"),
 		H = Math.sqrt(3) / 2,
+        triangleSlope = Math.tan(Math.PI / 3),
 		triangles = [],
 		drawGrid = true
 		drawOutline = false,
@@ -16,11 +17,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		this.centerY = y + side * H / 2;
 		// centroidX is equal to centerX
 		this.centroidY = y + (H * side / 3);
-		this.color = '#55FF77';
+		this.color = getRandomColor(0, 100, 50, 8);
 
 		this.drawStroke = function (scale) {
 			ctx.beginPath();
-			var tempX = this.x + .5 * (1 - scale) * this.side;
+			var tempX = this.centerX - .5 * scale * this.side;
 			var tempY = this.centroidY - scale * this.side * H / 3;
 			ctx.moveTo(tempX, tempY);
 			ctx.lineTo(tempX + this.side * scale, tempY);
@@ -41,11 +42,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			ctx.stroke();
 		}
 
-		this.drawScaled = function (scale) {
+		this.drawScaled = function (mousePos) {
+			var distance = Math.sqrt(Math.pow(mousePos.x - this.centerX, 2) + Math.pow(mousePos.y - this.centroidY, 2));
+			var scale = Math.sqrt(Math.max(1 - (distance / 100), 0));
 			if (scale > 0.01) {
 				ctx.beginPath();
-				var tempX = this.x + .5 * (1 - scale) * this.side;
+				var tempX = this.centerX - .5 * scale * this.side;
 				var tempY = this.centroidY - scale * this.side * H / 3;
+				if (squeezeTogether) {
+					const xVector = (mousePos.x - this.centerX);
+					const yVector = (mousePos.y - this.centroidY);
+        			const intersect = triangleIntersection(xVector, yVector, side);
+					tempX += (xVector > 0 ? Math.min(xVector, intersect.x) : Math.max(xVector, intersect.x)) * (1 - scale);
+					tempY += (yVector > 0 ? Math.min(yVector, intersect.y) : Math.max(yVector, intersect.y)) * (1 - scale);
+				}
 				ctx.moveTo(tempX, tempY);
 				ctx.lineTo(tempX + this.side * scale, tempY);
 				ctx.lineTo(tempX + this.side / 2 * scale, tempY + this.side * H * scale);
@@ -54,11 +64,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				ctx.fill();
 				if (drawOutline)
 					ctx.stroke();
-
-				// ctx.beginPath();
-				// ctx.fillStyle = "#000";
-				// ctx.fillRect(this.centerX - 1, this.centroidY - 1, 2, 2);
-				// ctx.stroke();
 			}
 			if (drawGrid) {
 				this.drawUnscaled();
@@ -97,6 +102,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		}
 	}
 
+	// Given a vector from the center of a triangle, calculates where that
+	// vector will hit the side of an equalatoral triangle. A negative side
+	// value indicates a triangle with the point facing upwards.
+	function triangleIntersection(x, y, side) {
+		const slope = y / x || 0;
+		if (side < 0) {
+			x = -x;
+			y = -y;
+		}
+		let xcoord, ycoord;
+		if (
+			(x > 0 && slope < -1 * triangleSlope ** -1) ||
+			(x < 0 && slope > triangleSlope ** -1) ||
+			(x == 0 && y < 0)
+		) {
+			ycoord = -1/3 * H * side;
+			xcoord = -(1 / slope) * H * side * 1/3;
+		} else {
+			if (x > 0) {
+				xcoord = (2/3 * H * side) / (slope + triangleSlope);
+				ycoord = -1 * triangleSlope * xcoord + 2/3 * H * side;
+			} else {
+				xcoord = (-2/3 * H * side) / (slope - triangleSlope) * -1;
+				ycoord = triangleSlope * xcoord - 2/3 * H * side * -1;
+			}
+
+		}
+		return {
+			x: xcoord,
+			y: ycoord
+		}
+	}
+
 	document.getElementById("drawGrid").onclick = function (evt) {
 		drawGrid = (document.getElementById("drawGrid").checked);
 		drawFrame(evt);
@@ -120,10 +158,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		ctx.clearRect(0, 0, c.width, c.height);
 		var mousePos = getMousePos(c, evt);
 		for (var tri in triangles) {
-			var t = triangles[tri];
-			var distance = Math.sqrt(Math.pow(Math.abs(mousePos.x - t.centerX), 2) + Math.pow(Math.abs(mousePos.y - t.centerY), 2));
-			var scale = Math.pow(Math.max(1 - (distance / 100), 0), .5);
-			t.drawScaled(scale);
+			triangles[tri].drawScaled(mousePos);
 		}
 	}
 
@@ -133,3 +168,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		clientY : -500
 	});
 });
+
+function rand(min, max) {
+	return min + Math.random() * (max - min);
+}
+
+function HSLstring(hslArray) {
+	return "hsl(" + hslArray[0] + "," + hslArray[1] + "%," + hslArray[2] + "%)";
+}
+
+function getRandomColor(baseH, baseS, baseL, range) {
+	var h = baseH + rand(-range, range);
+	var s = baseS + rand(-range, range);
+	if (s > 100) s = 100;
+	if (s < 0) s = 0;
+	var l = baseL + rand(-range, range);
+	if (l > 100) l = 100;
+	if (l < 0) l = 0;
+	return HSLstring([h, s, l]);
+}
